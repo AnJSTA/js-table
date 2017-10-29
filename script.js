@@ -73,7 +73,7 @@ const appendElement = (el, placeholder) => {
 
 const ul = createHtml('ul');
 
-const drop = limit().map((x, i) => ul.innerHTML += `<li value="${i}" onclick="displayPage(event)" data-index="${i}">${x}</li>`);
+const drop = limit().map((x, i) => ul.innerHTML += `<li value="${i}" onclick="displayPage(this, event)" data-val="${x}">${x}</li>`);
 
 const tbl = createHtml('table');
 
@@ -127,15 +127,16 @@ appendElement(tr, thead);
 appendElement(thead, tbl);
 appendElement(tbl, container);
 
-const displayPage = (e) => {
+const displayPage = (cont, e) => {
 	console.log(sta2[e.target.value]);
 	console.log(e.target.nodeName);
 	console.log(e.target.value);
+	console.log(cont.getAttribute('data-val'));
 };
 
 const pagination = (ar) => {
 	return ar.forEach((x, i) => {
-		container.innerHTML += `<button value="${i}" onclick="displayPage(event)">${i + 1}</button>`;
+		container.innerHTML += `<button value="${i}" onclick="displayPage(this, event)">${i + 1}</button>`;
 	});
 }
 
